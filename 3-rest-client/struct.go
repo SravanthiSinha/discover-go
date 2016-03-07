@@ -16,7 +16,7 @@ type movie struct {
 	Awards     string `json:"Awards"`
 	Poster     string `json:"Poster"`
 	Metascore  string `json:"Metascore"`
-	ImdbRating string `json:"imdbRating"`
+	ImdbRating float64 `json:"imdbRating,string"`
 	ImdbVotes  string `json:"imdbVotes"`
 	ImdbID     string `json:"imdbID"`
 	Type       string `json:"Type"`
