@@ -13,7 +13,7 @@ func main() {
 
 	m := new(movie)
 	json.NewDecoder(resp.Body).Decode(&m)
-	fmt.Println("The movie :", m.Title, " was released in", m.Year, " - the IMBD rating is ", m.ImdbRating*10, "% with ", m.ImdbVotes, " votes")
+	fmt.Println("The movie :", m.Title, " was released in", m.Year, " - the IMBD rating is ", m.ImdbRating*10, "% with ", m.ImdbVotes, "votes")
 	return
 
 }
