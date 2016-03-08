@@ -5,30 +5,31 @@ import (
 	"flag"
 	"fmt"
 	"net/http"
+	"strconv"
 	"time"
 )
 
 type mv struct {
-	Title      string  `json:"Title"`
-	Year       string  `json:"Year"`
-	Rated      string  `json:"Rated"`
-	Released   string  `json:"Released"`
-	Runtime    string  `json:"Runtime"`
-	Genre      string  `json:"Genre"`
-	Director   string  `json:"Director"`
-	Writer     string  `json:"Writer"`
-	Actors     string  `json:"Actors"`
-	Plot       string  `json:"Plot"`
-	Language   string  `json:"Language"`
-	Country    string  `json:"Country"`
-	Awards     string  `json:"Awards"`
-	Poster     string  `json:"Poster"`
-	Metascore  string  `json:"Metascore"`
-	ImdbRating float64 `json:"imdbRating,string"`
-	ImdbVotes  string  `json:"imdbVotes"`
-	ImdbID     string  `json:"imdbID"`
-	Type       string  `json:"Type"`
-	Response   string  `json:"Response"`
+	Title      string `json:"Title"`
+	Year       string `json:"Year"`
+	Rated      string `json:"Rated"`
+	Released   string `json:"Released"`
+	Runtime    string `json:"Runtime"`
+	Genre      string `json:"Genre"`
+	Director   string `json:"Director"`
+	Writer     string `json:"Writer"`
+	Actors     string `json:"Actors"`
+	Plot       string `json:"Plot"`
+	Language   string `json:"Language"`
+	Country    string `json:"Country"`
+	Awards     string `json:"Awards"`
+	Poster     string `json:"Poster"`
+	Metascore  string `json:"Metascore"`
+	ImdbRating string `json:"imdbRating"`
+	ImdbVotes  string `json:"imdbVotes"`
+	ImdbID     string `json:"imdbID"`
+	Type       string `json:"Type"`
+	Response   string `json:"Response"`
 }
 
 type SearchList struct {
@@ -62,7 +63,8 @@ func main() {
 
 		m := new(mv)
 		json.NewDecoder(resp2.Body).Decode(&m)
-		fmt.Println("The movie :", m.Title, " was released in", m.Year, " - the IMBD rating is ", m.ImdbRating*10, "% with ", m.ImdbVotes, "votes.")
+		rating, _ := strconv.ParseFloat(m.ImdbRating, 64)
+		fmt.Printf("The movie : %s was released in %s - the IMDB rating is %d%% with %s votes.\n", m.Title, m.Year, int(rating*10), m.ImdbVotes)
 	}
 	defer resp.Body.Close()
 
